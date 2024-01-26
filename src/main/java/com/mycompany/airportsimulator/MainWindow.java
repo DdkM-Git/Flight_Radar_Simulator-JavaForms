@@ -36,10 +36,10 @@ public class MainWindow extends javax.swing.JFrame {
         this.addAirport(new Airport(4, -30, -30, "Air4"), 3);
         this.addAirport(new Airport(5, 30, 30, "Air5"), 4);
 
-        this.addPlane(new Plane(1, 1, 1, 30, "Airbus"), 0);
-        this.addPlane(new Plane(1, 1, 1, 30, "Airbus"), 1);
-        this.addPlane(new Plane(1, 1, 1, 30, "Airbus"), 2);
-        this.addPlane(new Plane(1, 1, 1, 30, "Airbus"), 3);
+        this.addPlane(new Plane(1, 1, 1, 60, "Airbus"), 0);
+        this.addPlane(new Plane(1, 1, 1, 60, "Airbus"), 1);
+        this.addPlane(new Plane(1, 1, 1, 60, "Airbus"), 2);
+        this.addPlane(new Plane(1, 1, 1, 60, "Airbus"), 3);
 
         currentTime = 0;
         timer = new Timer(1000, (ActionEvent e) -> {
@@ -67,14 +67,23 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void updateSimulation() {
         currentTime++;
-        for (Flight flight : this.flights) {
-            flight.movePlane();
+        for (int i = 0; i < flights.length; i++) {
+
+            if (this.isPlaneAtAirport(flights[i].getPlane(), flights[i].getEndAirport())) {
+                if (flights[i].getPlane().hasFullTank()) {
+                    this.newFlight(randomFlight(flights[i].getPlane(), flights[i].getEndAirport()), i);
+                } else {
+                    flights[i].getPlane().refuel();
+                }
+            } else {
+                flights[i].movePlane();
+            }
         }
         this.table1.updateRows(this.flights, this.currentTime);
     }
 
-    private void addFlight(Plane plane, Airport startAirport, Airport endAirport, int i) {
-        this.flights[i] = new Flight(startAirport, endAirport, plane);
+    private void newFlight(Flight flight, int i) {
+        this.flights[i] = flight;
     }
 
     private void addFlight(Flight flight, int i) {
@@ -92,6 +101,10 @@ public class MainWindow extends javax.swing.JFrame {
     private Airport randomAirport() {
         double random = Math.random() * this.airports.length;
         return this.airports[(int) random];
+    }
+
+    private boolean isPlaneAtAirport(Plane plane, Airport airport) {
+        return plane.getX() == airport.getX() && plane.getY() == airport.getY();
     }
 
     private Flight randomFlight(Plane plane, Airport startAirport) {

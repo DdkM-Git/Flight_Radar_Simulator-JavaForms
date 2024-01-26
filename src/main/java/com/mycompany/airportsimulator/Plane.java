@@ -18,6 +18,7 @@ public class Plane {
     private float speed;
     private float fuel;
     private float fuelMax;
+    private float fuelTime;
     private String name;
 
     public Plane(int x, int y, float speed, float fuel, String name) {
@@ -26,6 +27,7 @@ public class Plane {
         this.speed = speed;
         this.fuel = fuel;
         this.fuelMax = fuel;
+        this.fuelTime = 0;
         this.name = name;
     }
 
@@ -39,6 +41,10 @@ public class Plane {
 
     public String getName() {
         return name;
+    }
+
+    public boolean hasFullTank() {
+        return this.fuel == this.fuelMax;
     }
 
     @Override
@@ -123,10 +129,26 @@ public class Plane {
         return angleRadian;
     }
 
-    public void refuelFullTank() {
-        this.fuel = this.fuelMax;
+    public void refuel() {
+        if (this.fuelTime <= 0) {
+            this.fuelTime = 9;
+        } else {
+            this.fuelTime--;
+            if (this.fuelTime == 0) {
+                this.fuel = this.fuelMax;
+            }
+        }
+
     }
 
+    /*public void refuelTank() {
+        float fuelPart = (this.fuelMax - this.fuel) / 10;
+        if (this.fuel + fuelPart > this.fuelMax) {
+            this.fuel = this.fuelMax;
+        } else {
+            this.fuel += this.fuel / 10;
+        }
+    }*/
     public void draw(Graphics g) {
         int r = 10;
         g.setColor(Color.RED);
