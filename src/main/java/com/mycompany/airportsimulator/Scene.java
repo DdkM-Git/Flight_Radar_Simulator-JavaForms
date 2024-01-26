@@ -17,16 +17,18 @@ public class Scene extends javax.swing.JPanel {
     }
 
     @Override
-    public void paint(Graphics g)
-    {
+    public void paint(Graphics g) {
         super.paint(g); //To change body of generated methods, choose Tools | Templates.
 
-        /*for(Plane p: MainWindow.tab)  
-        {
+        for (Airport ap : MainWindow.airports) {
+            ap.draw(g);
+        }
+
+        for (Plane p : MainWindow.planes) {
             p.draw(g);
-        }*/
+        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

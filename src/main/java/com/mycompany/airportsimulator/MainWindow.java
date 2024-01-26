@@ -21,25 +21,26 @@ public class MainWindow extends javax.swing.JFrame {
 
     private Timer timer;
     private int currentTime;
-    private Flight[] flights = new Flight[4];
-    private Airport[] airports = new Airport[5];
-    private Plane[] planes = new Plane[4];
+    public static Flight[] flights = new Flight[4];
+    public static Airport[] airports = new Airport[5];
+    public static Plane[] planes = new Plane[4];
+    public static Scene myScene;
 
     //public static Vector<Plane> tab = new Vector<>();
     //public static Scene ms;
     public MainWindow() {
         initComponents();
 
-        this.addAirport(new Airport(1, 1, 1, "Air1"), 0);
-        this.addAirport(new Airport(2, 20, -20, "Air2"), 1);
-        this.addAirport(new Airport(3, -20, 30, "Air3"), 2);
-        this.addAirport(new Airport(4, -30, -30, "Air4"), 3);
-        this.addAirport(new Airport(5, 30, 30, "Air5"), 4);
+        this.addAirport(new Airport(1, 50, 50, "Air1"), 0);
+        this.addAirport(new Airport(2, 90, 60, "Air2"), 1);
+        this.addAirport(new Airport(3, 180, 130, "Air3"), 2);
+        this.addAirport(new Airport(4, 100, 150, "Air4"), 3);
+        this.addAirport(new Airport(5, 160, 180, "Air5"), 4);
 
-        this.addPlane(new Plane(1, 1, 1, 60, "Airbus"), 0);
-        this.addPlane(new Plane(1, 1, 1, 60, "Airbus"), 1);
-        this.addPlane(new Plane(1, 1, 1, 60, "Airbus"), 2);
-        this.addPlane(new Plane(1, 1, 1, 60, "Airbus"), 3);
+        this.addPlane(new Plane(this.airports[0].getX(), this.airports[0].getY(), 5, 60, "Airbus"), 0);
+        this.addPlane(new Plane(this.airports[1].getX(), this.airports[1].getY(), 5, 60, "Airbus"), 1);
+        this.addPlane(new Plane(this.airports[2].getX(), this.airports[2].getY(), 5, 60, "Airbus"), 2);
+        this.addPlane(new Plane(this.airports[3].getX(), this.airports[3].getY(), 5, 60, "Airbus"), 3);
 
         currentTime = 0;
         timer = new Timer(1000, (ActionEvent e) -> {
@@ -80,6 +81,8 @@ public class MainWindow extends javax.swing.JFrame {
             }
         }
         this.table1.updateRows(this.flights, this.currentTime);
+
+        scene1.repaint();
     }
 
     private void newFlight(Flight flight, int i) {
@@ -201,8 +204,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         //System.out.println("Hello " + this.currentTime);
         startSimulation();
-        /*ms = new Scene();
-        
+        myScene = scene1;
+        /*
         int r = (int)(Math.random()*255);
         int g = (int)(Math.random()*255);
         int b = (int)(Math.random()*255);*/
