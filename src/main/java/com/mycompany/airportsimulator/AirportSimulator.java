@@ -4,69 +4,99 @@
  */
 package com.mycompany.airportsimulator;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Timer;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author mateuszd
  */
-public class MainWindow extends javax.swing.JFrame {
+public class AirportSimulator extends javax.swing.JFrame {
 
-    private Timer timer;
+    //private Timer timer;
     private int currentTime;
-    public static Flight[] flights = new Flight[4];
-    public static Airport[] airports = new Airport[5];
-    public static Plane[] planes = new Plane[4];
+    //public static Vector<Plane> tab = new Vector<>();
+    public static Vector<Airport> airports = new Vector<>();
+    public static Vector<Plane> planes = new Vector<>();
+    public static Vector<Flight> flights = new Vector<>();
     public static Scene myScene;
 
     //public static Vector<Plane> tab = new Vector<>();
     //public static Scene ms;
-    public MainWindow() {
+    public AirportSimulator() {
         initComponents();
 
-        this.addAirport(new Airport(1, 50, 50, "Air1"), 0);
-        this.addAirport(new Airport(2, 90, 60, "Air2"), 1);
-        this.addAirport(new Airport(3, 180, 130, "Air3"), 2);
-        this.addAirport(new Airport(4, 100, 150, "Air4"), 3);
-        this.addAirport(new Airport(5, 160, 180, "Air5"), 4);
+        AirportSimulator.airports.add(new Airport(1, 50, 50, "Air1"));
+        AirportSimulator.airports.add(new Airport(2, 90, 60, "Air2"));
+        AirportSimulator.airports.add(new Airport(3, 180, 130, "Air3"));
+        AirportSimulator.airports.add(new Airport(4, 100, 150, "Air4"));
+        AirportSimulator.airports.add(new Airport(5, 160, 180, "Air5"));
 
-        this.addPlane(new Plane(this.airports[0].getX(), this.airports[0].getY(), 5, 60, "Airbus"), 0);
-        this.addPlane(new Plane(this.airports[1].getX(), this.airports[1].getY(), 5, 60, "Airbus"), 1);
-        this.addPlane(new Plane(this.airports[2].getX(), this.airports[2].getY(), 5, 60, "Airbus"), 2);
-        this.addPlane(new Plane(this.airports[3].getX(), this.airports[3].getY(), 5, 60, "Airbus"), 3);
+        /*AirportSimulator.addPlane(new Plane(AirportSimulator.airports.elementAt(0).getX(), AirportSimulator.airports.elementAt(0).getY(), 5, 60, "Airbus"));
+        AirportSimulator.addPlane(new Plane(AirportSimulator.airports.elementAt(1).getX(), AirportSimulator.airports.elementAt(1).getY(), 5, 60, "Airbus"));
+        AirportSimulator.addPlane(new Plane(AirportSimulator.airports.elementAt(2).getX(), AirportSimulator.airports.elementAt(2).getY(), 5, 60, "Airbus"));
+        this.addPlane(new Plane(this.airports[3].getX(), this.airports[3].getY(), 5, 60, "Airbus"));*/
+        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(0).getX(), AirportSimulator.airports.elementAt(0).getY(), 5, 60, "Airbus1"));
+        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(1).getX(), AirportSimulator.airports.elementAt(1).getY(), 5, 60, "Airbus2"));
+        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(2).getX(), AirportSimulator.airports.elementAt(2).getY(), 5, 60, "Airbus3"));
+        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(3).getX(), AirportSimulator.airports.elementAt(3).getY(), 5, 60, "Airbus4"));
 
         currentTime = 0;
-        timer = new Timer(1000, (ActionEvent e) -> {
+        /*timer = new Timer(1000, (ActionEvent e) -> {
             updateSimulation();
-        });
+        });*/
 
     }
 
     private void startSimulation() {
         //currentTime = 0;
 
-        // Dodawanie przykładowych samolotów i lotnisk
-        addFlight(randomFlight(this.planes[0], this.airports[0]), 0);
-        addFlight(randomFlight(this.planes[1], this.airports[0]), 1);
-        addFlight(randomFlight(this.planes[2], this.airports[0]), 2);
-        addFlight(randomFlight(this.planes[3], this.airports[0]), 3);
+                AirportSimulator.airports.add(new Airport(1, 50, 50, "Air1"));
+        AirportSimulator.airports.add(new Airport(2, 90, 60, "Air2"));
+        AirportSimulator.airports.add(new Airport(3, 180, 130, "Air3"));
+        AirportSimulator.airports.add(new Airport(4, 100, 150, "Air4"));
+        AirportSimulator.airports.add(new Airport(5, 160, 180, "Air5"));
 
-        this.table1.updateRows(this.flights, this.currentTime);
-        timer.start();
+        /*AirportSimulator.addPlane(new Plane(AirportSimulator.airports.elementAt(0).getX(), AirportSimulator.airports.elementAt(0).getY(), 5, 60, "Airbus"));
+        AirportSimulator.addPlane(new Plane(AirportSimulator.airports.elementAt(1).getX(), AirportSimulator.airports.elementAt(1).getY(), 5, 60, "Airbus"));
+        AirportSimulator.addPlane(new Plane(AirportSimulator.airports.elementAt(2).getX(), AirportSimulator.airports.elementAt(2).getY(), 5, 60, "Airbus"));
+        this.addPlane(new Plane(this.airports[3].getX(), this.airports[3].getY(), 5, 60, "Airbus"));*/
+        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(0).getX(), AirportSimulator.airports.elementAt(0).getY(), 5, 60, "Airbus1"));
+        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(1).getX(), AirportSimulator.airports.elementAt(1).getY(), 5, 60, "Airbus2"));
+        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(2).getX(), AirportSimulator.airports.elementAt(2).getY(), 5, 60, "Airbus3"));
+        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(3).getX(), AirportSimulator.airports.elementAt(3).getY(), 5, 60, "Airbus4"));
+
+        
+        // Dodawanie przykładowych samolotów i lotnisk
+        for (Plane plane : AirportSimulator.planes) {
+            AirportSimulator.flights.add(randomFlight(plane, AirportSimulator.airports.elementAt(0)));
+        }
+
+        Watch w = new Watch();
+        w.start();
+        //this.table1.updateRows(this.flights, this.currentTime);
+        //timer.start();
     }
 
     private void stopSimulation() {
-        timer.stop();
+        //timer.stop();
     }
 
-    private void updateSimulation() {
+    public static Flight randomFlight(Plane plane, Airport startAirport) {
+        Airport targetAirport = AirportSimulator.randomAirport();
+
+        while (targetAirport.getId() == startAirport.getId()) {
+            targetAirport = AirportSimulator.randomAirport();
+        }
+
+        return new Flight(startAirport, targetAirport, plane);
+    }
+
+    public static Airport randomAirport() {
+        double random = Math.random() * AirportSimulator.airports.capacity();
+        return AirportSimulator.airports.elementAt((int) random);
+    }
+
+    /*private void updateSimulation() {
         currentTime++;
         for (int i = 0; i < flights.length; i++) {
 
@@ -83,34 +113,21 @@ public class MainWindow extends javax.swing.JFrame {
         this.table1.updateRows(this.flights, this.currentTime);
 
         scene1.repaint();
-    }
+    }*/
 
-    private void newFlight(Flight flight, int i) {
+ /*private void newFlight(Flight flight, int i) {
         this.flights[i] = flight;
-    }
-
-    private void addFlight(Flight flight, int i) {
-        this.flights[i] = flight;
-    }
-
-    private void addAirport(Airport airport, int i) {
-        this.airports[i] = airport;
-    }
-
-    private void addPlane(Plane plane, int i) {
-        this.planes[i] = plane;
-    }
-
-    private Airport randomAirport() {
+    }*/
+ /*private Airport randomAirport() {
         double random = Math.random() * this.airports.length;
         return this.airports[(int) random];
-    }
+    }*/
 
-    private boolean isPlaneAtAirport(Plane plane, Airport airport) {
+ /*private boolean isPlaneAtAirport(Plane plane, Airport airport) {
         return plane.getX() == airport.getX() && plane.getY() == airport.getY();
-    }
+    }*/
 
-    private Flight randomFlight(Plane plane, Airport startAirport) {
+ /*private Flight randomFlight(Plane plane, Airport startAirport) {
         Airport targetAirport = this.randomAirport();
 
         while (targetAirport.getId() == startAirport.getId()) {
@@ -118,8 +135,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
 
         return new Flight(startAirport, targetAirport, plane);
-    }
-
+    }*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -241,19 +257,20 @@ public class MainWindow extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AirportSimulator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AirportSimulator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AirportSimulator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AirportSimulator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new MainWindow().setVisible(true);
+            new AirportSimulator().setVisible(true);
         });
     }
 

@@ -20,11 +20,11 @@ public class Scene extends javax.swing.JPanel {
     public void paint(Graphics g) {
         super.paint(g); //To change body of generated methods, choose Tools | Templates.
 
-        for (Airport ap : MainWindow.airports) {
+        for (Airport ap : AirportSimulator.airports) {
             ap.draw(g);
         }
 
-        for (Plane p : MainWindow.planes) {
+        for (Plane p : AirportSimulator.planes) {
             p.draw(g);
         }
     }
