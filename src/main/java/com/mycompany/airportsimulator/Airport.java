@@ -17,7 +17,7 @@ public class Airport {
     private int x;
     private int y;
     private String name;
-    //private Plane currentPlane;
+    private Plane currentPlane;
 
     public Airport(int id, int x, int y, String name) {
         this.id = id;
@@ -43,19 +43,20 @@ public class Airport {
         return this.name;
     }
 
-    /*public Plane getCurrentPlane() {
-        return this.Plane;
+    public Plane getCurrentPlane() {
+        return this.currentPlane;
     }
 
-    public Plane setCurrentPlane(Plane plane) {
+    public void setCurrentPlane(Plane plane) {
         if (this.currentPlane == null) {
             this.currentPlane = plane;
         }
     }
 
-    public Plane clearCurrentPlane() {
+    public void clearCurrentPlane() {
         this.currentPlane = null;
-    }*/
+    }
+    
     @Override
     public String toString() {
         return "Airport{" + "x=" + x + ", y=" + y + '}';

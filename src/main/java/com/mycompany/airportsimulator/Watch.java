@@ -19,13 +19,22 @@ public class Watch extends Thread {
     public void run() {
         while (true) {
 
-            for (int i = 0; i < AirportSimulator.flights.capacity(); i++) {
-                System.out.println("for: " + i + " : " + AirportSimulator.flights.capacity());
-                if (this.isPlaneAtAirport(AirportSimulator.flights.elementAt(i).getPlane(), AirportSimulator.flights.elementAt(i).getEndAirport())) {
-                    if (AirportSimulator.flights.elementAt(i).getPlane().hasFullTank()) {
-                        this.newFlight(AirportSimulator.randomFlight(AirportSimulator.flights.elementAt(i).getPlane(), AirportSimulator.flights.elementAt(i).getEndAirport()));
+            for (int i = 0; i < AirportSimulator.flights.size(); i++) {
+
+                boolean isTheFlightFinish = this.isPlaneAtAirport(AirportSimulator.flights.elementAt(i).getPlane(), AirportSimulator.flights.elementAt(i).getEndAirport());
+                if (isTheFlightFinish) {
+                    AirportSimulator.flights.elementAt(i).getEndAirport().setCurrentPlane(
+                            AirportSimulator.flights.elementAt(i).getPlane()
+                    );
+                    //boolean hasThePlaneFullTank = AirportSimulator.flights.elementAt(i).getPlane().hasFullTank();
+                    if (
+                        AirportSimulator.flights.elementAt(i).getPlane().refuel()) {
+                        System.out.print("AAA");
+                        AirportSimulator.flights.add(AirportSimulator.randomFlight(AirportSimulator.flights.elementAt(i).getPlane(), AirportSimulator.flights.elementAt(i).getEndAirport()));
+                        AirportSimulator.flights.remove(AirportSimulator.flights.elementAt(i));
+                        AirportSimulator.flights.elementAt(i).getEndAirport().clearCurrentPlane();
                     } else {
-                        AirportSimulator.flights.elementAt(i).getPlane().refuel();
+                        System.out.print("BBB");
                     }
                 } else {
                     AirportSimulator.flights.elementAt(i).movePlane();
@@ -33,7 +42,7 @@ public class Watch extends Thread {
             }
 
             try {
-                sleep(1000);
+                sleep(100);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Plane.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -45,10 +54,6 @@ public class Watch extends Thread {
 
     private boolean isPlaneAtAirport(Plane plane, Airport airport) {
         return plane.getX() == airport.getX() && plane.getY() == airport.getY();
-    }
-
-    private void newFlight(Flight flight) {
-        AirportSimulator.flights.add(flight);
     }
 
 }

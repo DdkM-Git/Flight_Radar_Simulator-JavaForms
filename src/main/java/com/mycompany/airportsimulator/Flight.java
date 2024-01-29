@@ -9,41 +9,39 @@ package com.mycompany.airportsimulator;
  * @author mateuszd
  */
 public class Flight {
-    
+
     private Airport startAirport;
     private Airport endAirport;
     private Plane plane;
-    
-    public Airport getStartAirport(){
+
+    public Airport getStartAirport() {
         return this.startAirport;
     }
-    
-    public Airport getEndAirport(){
+
+    public Airport getEndAirport() {
         return this.endAirport;
     }
-    
-    public Plane getPlane(){
+
+    public Plane getPlane() {
         return this.plane;
     }
-    
-    
-    public Flight(Airport startAirport, Airport endAirport, Plane plane){
+
+    public Flight(Airport startAirport, Airport endAirport, Plane plane) {
         this.startAirport = startAirport;
         this.endAirport = endAirport;
         this.plane = plane;
     }
-    
-    public void movePlane(){
-        this.plane.move(this.endAirport.getX(),this.endAirport.getY());
+
+    public void movePlane() {
+        this.plane.move(this.endAirport.getX(), this.endAirport.getY(), this.endAirport.getCurrentPlane());
     }
-    
-    public void movePlane(int i){
-        
+
+    public void movePlane(int i) {
+
     }
-    
+
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Flight {" + "A=" + this.startAirport.toString() + ", B=" + this.endAirport.toString() + ", P=" + this.plane.toString() + '}';
     }
 }

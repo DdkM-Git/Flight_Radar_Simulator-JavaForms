@@ -4,6 +4,7 @@
  */
 package com.mycompany.airportsimulator;
 
+import java.awt.Color;
 import java.util.Vector;
 
 /**
@@ -31,54 +32,25 @@ public class AirportSimulator extends javax.swing.JFrame {
         AirportSimulator.airports.add(new Airport(4, 100, 150, "Air4"));
         AirportSimulator.airports.add(new Airport(5, 160, 180, "Air5"));
 
-        /*AirportSimulator.addPlane(new Plane(AirportSimulator.airports.elementAt(0).getX(), AirportSimulator.airports.elementAt(0).getY(), 5, 60, "Airbus"));
-        AirportSimulator.addPlane(new Plane(AirportSimulator.airports.elementAt(1).getX(), AirportSimulator.airports.elementAt(1).getY(), 5, 60, "Airbus"));
-        AirportSimulator.addPlane(new Plane(AirportSimulator.airports.elementAt(2).getX(), AirportSimulator.airports.elementAt(2).getY(), 5, 60, "Airbus"));
-        this.addPlane(new Plane(this.airports[3].getX(), this.airports[3].getY(), 5, 60, "Airbus"));*/
-        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(0).getX(), AirportSimulator.airports.elementAt(0).getY(), 5, 60, "Airbus1"));
-        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(1).getX(), AirportSimulator.airports.elementAt(1).getY(), 5, 60, "Airbus2"));
-        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(2).getX(), AirportSimulator.airports.elementAt(2).getY(), 5, 60, "Airbus3"));
-        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(3).getX(), AirportSimulator.airports.elementAt(3).getY(), 5, 60, "Airbus4"));
+        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(0).getX(), AirportSimulator.airports.elementAt(0).getY(), 5, 400, "Airbus1",Color.RED));
+        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(1).getX(), AirportSimulator.airports.elementAt(1).getY(), 5, 460, "Airbus2",Color.BLUE));
+        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(2).getX(), AirportSimulator.airports.elementAt(2).getY(), 5, 460, "Airbus3",Color.YELLOW));
+        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(3).getX(), AirportSimulator.airports.elementAt(3).getY(), 5, 460, "Airbus4",Color.MAGENTA));
 
         currentTime = 0;
-        /*timer = new Timer(1000, (ActionEvent e) -> {
-            updateSimulation();
-        });*/
-
     }
 
     private void startSimulation() {
-        //currentTime = 0;
 
-                AirportSimulator.airports.add(new Airport(1, 50, 50, "Air1"));
-        AirportSimulator.airports.add(new Airport(2, 90, 60, "Air2"));
-        AirportSimulator.airports.add(new Airport(3, 180, 130, "Air3"));
-        AirportSimulator.airports.add(new Airport(4, 100, 150, "Air4"));
-        AirportSimulator.airports.add(new Airport(5, 160, 180, "Air5"));
-
-        /*AirportSimulator.addPlane(new Plane(AirportSimulator.airports.elementAt(0).getX(), AirportSimulator.airports.elementAt(0).getY(), 5, 60, "Airbus"));
-        AirportSimulator.addPlane(new Plane(AirportSimulator.airports.elementAt(1).getX(), AirportSimulator.airports.elementAt(1).getY(), 5, 60, "Airbus"));
-        AirportSimulator.addPlane(new Plane(AirportSimulator.airports.elementAt(2).getX(), AirportSimulator.airports.elementAt(2).getY(), 5, 60, "Airbus"));
-        this.addPlane(new Plane(this.airports[3].getX(), this.airports[3].getY(), 5, 60, "Airbus"));*/
-        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(0).getX(), AirportSimulator.airports.elementAt(0).getY(), 5, 60, "Airbus1"));
-        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(1).getX(), AirportSimulator.airports.elementAt(1).getY(), 5, 60, "Airbus2"));
-        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(2).getX(), AirportSimulator.airports.elementAt(2).getY(), 5, 60, "Airbus3"));
-        AirportSimulator.planes.add(new Plane(AirportSimulator.airports.elementAt(3).getX(), AirportSimulator.airports.elementAt(3).getY(), 5, 60, "Airbus4"));
-
-        
-        // Dodawanie przykładowych samolotów i lotnisk
         for (Plane plane : AirportSimulator.planes) {
             AirportSimulator.flights.add(randomFlight(plane, AirportSimulator.airports.elementAt(0)));
         }
 
         Watch w = new Watch();
         w.start();
-        //this.table1.updateRows(this.flights, this.currentTime);
-        //timer.start();
     }
 
     private void stopSimulation() {
-        //timer.stop();
     }
 
     public static Flight randomFlight(Plane plane, Airport startAirport) {
@@ -92,50 +64,12 @@ public class AirportSimulator extends javax.swing.JFrame {
     }
 
     public static Airport randomAirport() {
-        double random = Math.random() * AirportSimulator.airports.capacity();
+        System.out.println("AC: " + AirportSimulator.airports.size());
+        System.out.println("PC: " + AirportSimulator.planes.size());
+        double random = Math.random() * AirportSimulator.airports.size();
         return AirportSimulator.airports.elementAt((int) random);
     }
 
-    /*private void updateSimulation() {
-        currentTime++;
-        for (int i = 0; i < flights.length; i++) {
-
-            if (this.isPlaneAtAirport(flights[i].getPlane(), flights[i].getEndAirport())) {
-                if (flights[i].getPlane().hasFullTank()) {
-                    this.newFlight(randomFlight(flights[i].getPlane(), flights[i].getEndAirport()), i);
-                } else {
-                    flights[i].getPlane().refuel();
-                }
-            } else {
-                flights[i].movePlane();
-            }
-        }
-        this.table1.updateRows(this.flights, this.currentTime);
-
-        scene1.repaint();
-    }*/
-
- /*private void newFlight(Flight flight, int i) {
-        this.flights[i] = flight;
-    }*/
- /*private Airport randomAirport() {
-        double random = Math.random() * this.airports.length;
-        return this.airports[(int) random];
-    }*/
-
- /*private boolean isPlaneAtAirport(Plane plane, Airport airport) {
-        return plane.getX() == airport.getX() && plane.getY() == airport.getY();
-    }*/
-
- /*private Flight randomFlight(Plane plane, Airport startAirport) {
-        Airport targetAirport = this.randomAirport();
-
-        while (targetAirport.getId() == startAirport.getId()) {
-            targetAirport = this.randomAirport();
-        }
-
-        return new Flight(startAirport, targetAirport, plane);
-    }*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
