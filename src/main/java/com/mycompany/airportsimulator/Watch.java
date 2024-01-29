@@ -20,21 +20,19 @@ public class Watch extends Thread {
         while (true) {
 
             for (int i = 0; i < AirportSimulator.flights.size(); i++) {
+                Plane currentPlane = AirportSimulator.flights.elementAt(i).getPlane();
+                //Airport currentStartAirport = AirportSimulator.flights.elementAt(i).getStartAirport();
+                Airport currentEndAirport = AirportSimulator.flights.elementAt(i).getEndAirport();
 
-                boolean isTheFlightFinish = this.isPlaneAtAirport(AirportSimulator.flights.elementAt(i).getPlane(), AirportSimulator.flights.elementAt(i).getEndAirport());
+                boolean isTheFlightFinish = this.isPlaneAtAirport(currentPlane, currentEndAirport);
                 if (isTheFlightFinish) {
-                    AirportSimulator.flights.elementAt(i).getEndAirport().setCurrentPlane(
+                    currentEndAirport.setCurrentPlane(
                             AirportSimulator.flights.elementAt(i).getPlane()
                     );
-                    //boolean hasThePlaneFullTank = AirportSimulator.flights.elementAt(i).getPlane().hasFullTank();
-                    if (
-                        AirportSimulator.flights.elementAt(i).getPlane().refuel()) {
-                        System.out.print("AAA");
-                        AirportSimulator.flights.add(AirportSimulator.randomFlight(AirportSimulator.flights.elementAt(i).getPlane(), AirportSimulator.flights.elementAt(i).getEndAirport()));
+                    if (currentPlane.refuel()) {
                         AirportSimulator.flights.remove(AirportSimulator.flights.elementAt(i));
-                        AirportSimulator.flights.elementAt(i).getEndAirport().clearCurrentPlane();
-                    } else {
-                        System.out.print("BBB");
+                        AirportSimulator.flights.add(AirportSimulator.randomFlight(currentPlane, currentEndAirport));
+                        currentEndAirport.clearCurrentPlane();
                     }
                 } else {
                     AirportSimulator.flights.elementAt(i).movePlane();
