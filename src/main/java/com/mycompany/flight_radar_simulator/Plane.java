@@ -144,7 +144,7 @@ public class Plane extends Thread {
     }
 
     public void refuel() throws InterruptedException {
-                    this.isRunning = false;
+        this.isRunning = false;
         Plane.sleep(10000);
         this.fuel = this.fuelMax;
     }
@@ -160,8 +160,9 @@ public class Plane extends Thread {
 
     @Override
     public void run() {
-        while (true) {
-        this.isRunning = true;
+        while (this.fuel > 0) {
+            this.isRunning = true;
+
             if (this.x == this.targetAirport.getX() && this.y == this.targetAirport.getY() && this.fuel != this.fuelMax) {
                 try {
                     this.targetAirport.refuelPlane(this);
@@ -190,6 +191,10 @@ public class Plane extends Thread {
         g.setColor(Color.BLACK);
         g.fillRect((int) this.x - r / 4, (int) this.y + r / 4, r / 2, r / 4);
         g.fillOval((int) x + 4 * r / 7, (int) y - r / 4, 4, 4);
+        if(!this.isAlive()&&this.fuel<=0){
+        g.drawString("Plane " + String.valueOf(this.id) + " crashed", (int) this.x - r, (int) this.y - r);
+        }else{
         g.drawString("Plane " + String.valueOf(this.id), (int) this.x - r, (int) this.y - r);
-    }
+        
+        }}
 }

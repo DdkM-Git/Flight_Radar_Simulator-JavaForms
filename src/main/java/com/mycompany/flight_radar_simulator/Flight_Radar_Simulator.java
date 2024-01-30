@@ -34,13 +34,13 @@ public class Flight_Radar_Simulator extends javax.swing.JFrame {
         Airport airport1 = Flight_Radar_Simulator.airports.elementAt(1);
         Airport airport2 = Flight_Radar_Simulator.airports.elementAt(2);
 
-        Plane newPlane1 = new Plane(airport0.getX(), airport0.getY(), 5, 400, 1);
+        Plane newPlane1 = new Plane(airport0.getX(), airport0.getY(), 5, 30, 1);
         newPlane1.setAirport(Flight_Radar_Simulator.airports.elementAt(0));
 
-        Plane newPlane2 = new Plane(airport1.getX(), airport1.getY(), 5, 400, 2);
+        Plane newPlane2 = new Plane(airport1.getX(), airport1.getY(), 5, 30, 2);
         newPlane2.setAirport(Flight_Radar_Simulator.airports.elementAt(0));
 
-        Plane newPlane3 = new Plane(airport2.getX(), airport2.getY(), 5, 400, 3);
+        Plane newPlane3 = new Plane(airport2.getX(), airport2.getY(), 5, 30, 3);
         newPlane3.setAirport(Flight_Radar_Simulator.airports.elementAt(0));
 
         Flight_Radar_Simulator.planes.add(newPlane1);
