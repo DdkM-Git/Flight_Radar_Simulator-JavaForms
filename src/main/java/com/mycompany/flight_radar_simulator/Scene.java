@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.mycompany.airportsimulator;
+package com.mycompany.flight_radar_simulator;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  *
@@ -20,12 +21,12 @@ public class Scene extends javax.swing.JPanel {
     public void paint(Graphics g) {
         super.paint(g); //To change body of generated methods, choose Tools | Templates.
 
-        for (Airport ap : AirportSimulator.airports) {
+        for (Airport ap : Flight_Radar_Simulator.airports) {
             ap.draw(g);
         }
 
-        for (Plane p : AirportSimulator.planes) {
-            p.draw(g);
+        for (Plane p : Flight_Radar_Simulator.planes) {
+            p.draw((Graphics2D) g);
         }
     }
 
@@ -38,6 +39,9 @@ public class Scene extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setMaximumSize(new java.awt.Dimension(400, 400));
+        setMinimumSize(new java.awt.Dimension(400, 400));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -46,7 +50,7 @@ public class Scene extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
